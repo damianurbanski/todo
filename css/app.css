@@ -1,0 +1,445 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Hammersmith+One|Josefin+Sans|Roboto+Slab');
+
+body{
+  padding-top: 60px;
+ 
+ background: #F1F3FA;
+  font-family: 'Poppins', sans-serif;
+}
+h1, h2, h3, h4, h5, h6{
+font-family: 'Roboto Slab', serif;
+word-wrap: break-word;
+}
+
+@media screen and (max-width: 768px){
+  body{
+  padding-top: 26px!important;
+  }
+  .page-wrapper{
+    padding:0!important;
+  }
+
+}
+
+button{
+  font-family: 'Hammersmith One', sans-serif;
+}
+
+
+::-webkit-scrollbar { 
+     width: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+ul > li {
+	list-style-type: none;
+}
+
+a, a:hover, a:visited, a:link{color:inherit;text-decoration: inherit;}
+
+.tooltip + .tooltip > .tooltip-inner, .tooltip + .tooltip > .tooltip-arrow {background-color: #f00!important;}
+
+
+
+/* Profile container */
+.profile {
+  margin: 20px 0;
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+  padding: 0px 0 10px 0;
+  background: #fff;
+  overflow-y: scroll;
+  max-height: 80vh;
+  padding-bottom: 50px;
+
+}
+.profile-sidebar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.profile-sidebar:hover::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-usertitle-name {
+  color: #5a7391;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.profile-usertitle-name > h4 > a > i {
+  position: absolute;
+  font-size:15px;
+  margin-top:1px;
+  opacity: .6;
+  transition:300ms ease;
+}
+.profile-usertitle-name > h4 > a > i:hover{
+  opacity: 1;
+  transform:rotate(.2turn);
+}
+
+.profile-usertitle-points {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.profile-userbuttons {
+  text-align: center;
+  margin-top: 10px;
+  position: relative;
+  padding: 20px;
+  padding-top: 0;
+  border-bottom: 1px solid #c7c7c7;
+
+}
+
+.profile-userbuttons .btn {
+  display: block;
+  margin-top: 2px;
+  width: 100%;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 15px;
+  padding-top:0px;
+  color:#666;
+  text-align: left;
+  background: none;
+}
+.profile-userbuttons .btn:hover, .profile-userbuttons .btn:focus{
+  background: #EEE; 
+}
+.profile-userbuttons .btn > i[class^="icon-"] {
+display: inline-block;
+font-size: 22px;
+transform: translateY(3px);
+}
+.profile-userbuttons > .btn >  i.count{
+  font-style: normal;
+  font-size: 11px;
+  color:#888;
+}  
+.profile-usermenu {
+  margin-top: 30px;
+}
+.profile-usermenu > .profile-list-title{
+  display: block;
+  padding:0 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color:#888;
+  margin-bottom: 5px;
+}
+.profile-usermenu ul li {
+    border-bottom: 1px solid #d2d2d2;
+    margin: 0px;
+
+}
+
+
+.profile-usermenu ul li a, .profile-usermenu ul li a {
+  color: black;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.profile-color{
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background: orangered;
+  border-radius: 50%;
+  transform: translateY(2px);
+
+}
+
+
+.profile-usermenu ul li.active {
+  border-bottom: none;
+}
+.profile-usermenu ul li.active a {
+  background-color: #f6f9fb;
+  border-left: 2px solid #5b9bd1;
+  margin-left: -2px;
+}
+.profile-usermenu ul li > .menu-dotted{
+display: block;
+position: absolute;
+right: 0;
+top:15px;
+background: none;
+border: none;
+opacity: 0;
+outline: none;
+border-radius: 4px;
+}
+.profile-usermenu ul li > .menu-dotted:focus{
+  background: #e2e2e2;
+}
+.profile-usermenu ul li:hover > .menu-dotted{
+  opacity: 1;
+}
+.submenu{
+  display: none;
+  padding: 2px 15px;
+  font-size: 16px;
+}
+
+.submenu > button{
+  background: none;
+  border:none;
+}
+
+.menu-dotted:focus ~ .submenu, .submenu:hover{
+  display: block;
+}
+
+/* Profile Content */
+.content {
+  padding: 20px;
+  background: #fff;
+  min-height: 80vh;
+   
+}
+
+.content, .profile-sidebar{
+border: 1px solid rgba(0, 0, 0, 0.13);
+}
+
+.padding-0{
+  padding: 1px;
+  
+}
+
+nav.navbar{
+  min-height: 30.8px;
+}
+
+
+.profile-sidebar{
+  -webkit-overflow:scrolling;
+  position: fixed;
+  width: 275px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.20);
+  margin-left: 8px;
+}
+.profile-sidebar > .icon-cancel{
+  position: absolute;
+  right: 0;
+  border: none;
+  background: none;
+  font-size:24px;
+}
+
+
+@media screen and (max-width: 1200px){
+  .profile-sidebar{
+    left: -100%;
+    top: 50px;
+    min-height: 100vh;
+    z-index: 10;
+    transition: 350ms ease;
+  }
+
+  .profile-sidebar.active{
+    left: -10px;
+  }
+}
+
+.project-title, .project-title:hover{
+  background: none;
+  border:none;
+  cursor: pointer;
+}
+
+.btn{
+  
+  border-radius: 4px;
+  padding:5px 10px;
+}
+
+/* ### COLORS ### */
+.btn-red{
+background: #f94444;
+}
+.btn-green{
+  background: #77b331;
+}
+
+.grey{
+ color:#999;
+}
+
+.red{
+      color: #f94444;
+}
+/* ### COLORS ### */
+
+/* ### TASKS LIST ###*/
+.tasks-wrapper{
+padding: 10px 30px;
+}
+
+@media screen and (max-width: 768px ){
+    .tasks-wrapper{
+      padding: 5px 0;
+  }
+}
+
+ul.tasks{
+  padding: 0px;
+}
+
+ul.tasks > li{
+  font-size:21px;
+  background:white;
+  padding:5px;
+  padding-bottom:5px;
+  list-style-type:none;
+  border-bottom: 1px solid #d8d8d8;
+  height: auto;
+}
+
+ul.tasks > li > a{
+margin-top:-3px;
+font-size: 16px;
+color:#555;
+}
+ul.tasks > li > .priority{
+font-size: 14px;
+color:#555;
+}
+.tasks-icon-done{
+    display: inline-block;
+    position: relative;
+    border: 1px solid #909090;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+    cursor: pointer;
+    transform:translateY(3px);
+}
+.tasks-icon-done:hover{
+ background: #e8e8e8;
+}
+.tasks-project{
+  color:#999;
+  font-size: 12px;
+  font-style: italic;
+}
+
+ul.tasks > li > .tasks-config{
+display: inline-block;
+float: right;
+color:#666;
+height: 100%;
+font-size: 14px;
+padding-top: 10px;
+}
+ul.tasks > li > .tasks-config > a > i{
+padding-right: 5px;
+}
+ul.tasks > li.add-task{
+margin-top: 10px;
+border:none;
+}
+.btn-icon{
+background:#eee;
+border: none;
+border-radius: 4px;
+color:black;
+font-size: 14px;
+padding: 10px;
+margin:5px;
+display: inline-block;
+height: 45px;
+}
+
+.add-task-input-wrapper{
+  padding: 5px;
+ }
+
+.add-task-input-wrapper input[type="text"]{
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  height: 40px;
+  border:1px solid #ccc;
+  border-radius: 4px;
+  padding-left: 5px;
+}
+.add-task-input-wrapper input[type="date"]{
+  width:150px;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.add-task-input-wrapper select{
+  padding: 5px;
+  background: none;
+  border: none;
+  max-width: 75%;
+}
+
+/* ### END TASKS LIST ###*/
+.submenu-absolute{
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    background-color: #fff;
+    z-index: 505;
+    color: #333;
+    padding: 10px;
+    border-collapse: separate;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.40);
+    max-width: 230px;
+    display: none;
+
+}
+.submenu-absolute.active{
+  display: block;
+}
+
+
+.submenu-absolute.priority-picker > span{
+  font-size:18px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+
+.priority-5{
+  color:#c5c5c5;
+}
+.priority-4{
+  color:#607D8B;
+}
+.priority-3{
+  color: #5bccff;
+}
+.priority-2{
+    color:#ffc107;
+
+}
+.priority-1{
+  color:#ff0000;
+}
+
