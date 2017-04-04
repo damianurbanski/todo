@@ -1,7 +1,8 @@
 ﻿<?php
 require '\modules\session.php';
-require '\components\user.component.php';
-$user = new User();
+require '\modules\user.php';
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,8 +32,8 @@ $user = new User();
     </button>
  <a class="navbar-brand" rel="home" href="#" title="Buy Sell Rent Everyting">
         <img style="max-width:100px; margin-top: -7px;"
-             src="/img/transparent-white-logo.png">
-             <span class="icon-remove nav-toggle">XXXX</span>
+             src="/img/">
+             <span class="icon-remove nav-toggle">XXX</span>
     </a>
   </div>
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -41,7 +42,7 @@ $user = new User();
         <a href="dashboard">
         <li><a href="register">Informacje</a></li>
         <li><a href="login">Logowanie</a></li>
-        <li><a href="#">Rejestracja</a></li>
+        <li><a href="modules/logout.php">Logout</a></li>
         </a></li>
       </ul>
   </div>
@@ -59,13 +60,13 @@ $user = new User();
 				<!-- SIDEBAR USER TITLE -->
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name">
-						<h4>Damian Urbański 
+						<h4><?=$user->get('name');?>
 						<a href=""><i class="icon-cog"></i></a>
 						</h4>
 						
 					</div>
 					<div class="profile-usertitle-points">
-					 PUNKTY: 412412
+					 PUNKTY:<?=$user->get('points');?>
 					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
@@ -74,13 +75,13 @@ $user = new User();
 				<button class="btn today">
 				<i class="icon-calendar-check-o"></i>
 				Szybkie
-				<i class="count">4422</i>
+				<i class="count"><?=$user->count_fast_tasks()?></i>
 				</button>
 				<button class="btn "><i class="icon-calendar-minus-o"></i>Dzisiaj 
-				<i class="count">4422</i>
+				<i class="count"><?=$user->count_today_tasks()?></i>
 				</button>
 				<button class="btn"><i class="icon-calendar-times-o"></i>Tydzień 
-				<i class="count">4422</i>
+				<i class="count"><?=$user->count_week_tasks()?></i>
 				</button>
 
 
@@ -91,10 +92,17 @@ $user = new User();
 				<div class="profile-usermenu">
 					<span class="profile-list-title">Projekty</span>
 					<ul class="nav">
+
+					<?php 
+					$projects = $user->get_projects();
+
+						foreach ($projects as $row):
+
+					?>
 						<li>
 							<a href="#">
 							<span class="profile-color"></span>
-							Lorem ipsum dolor asmet
+							<?=$row['name'];?>
 							</a>
 
 							<button class="icon-dot-3 menu-dotted"></button>
@@ -106,6 +114,7 @@ $user = new User();
 							</div>
 						</li>
 
+						<?php ENDFOREACH; ?>
 						
 					</ul>
 				</div>

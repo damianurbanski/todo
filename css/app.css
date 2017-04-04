@@ -11,6 +11,9 @@ font-family: 'Roboto Slab', serif;
 word-wrap: break-word;
 }
 
+
+h4{font-size:16px;}
+
 @media screen and (max-width: 768px){
   body{
   padding-top: 26px!important;
@@ -303,6 +306,7 @@ padding: 10px 30px;
 
 ul.tasks{
   padding: 0px;
+  margin-bottom: 34px;
 }
 
 ul.tasks > li{
@@ -317,7 +321,7 @@ ul.tasks > li{
 
 ul.tasks > li > a{
 margin-top:-3px;
-font-size: 16px;
+font-size: 14px;
 color:#555;
 }
 ul.tasks > li > .priority{
@@ -348,7 +352,6 @@ ul.tasks > li > .tasks-config{
 display: inline-block;
 float: right;
 color:#666;
-height: 100%;
 font-size: 14px;
 padding-top: 10px;
 }

@@ -1,5 +1,9 @@
 $(function(){
 "use strict";
+if(!window.history){
+	alert("Not supported");
+}
+
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),

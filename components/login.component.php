@@ -17,7 +17,7 @@
 			require("../config/dbconnect.php");
 			if(filter_var($this->login, FILTER_VALIDATE_EMAIL)) 
 			$query = 'SELECT * FROM users WHERE email = :login AND password = :password';
-			else $query = 'SELECT * FROM users WHERE login = :login AND password = :password';
+			else $query = 'SELECT id FROM users WHERE login = :login AND password = :password';
 			
 
 			$stmt = $pdo->prepare($query);
@@ -26,7 +26,6 @@
 			$stmt->execute();
 			return $stmt->fetch(PDO::FETCH_ASSOC);
 		}
-
 
 }
 

@@ -11,11 +11,14 @@ if($result = $login->init()){
 	$_SESSION['uid'] = $result['id'];
 	$_SESSION['name'] = $result['name'];
 	$_SESSION['login'] = $result['login'];
+	User::init($result['id']);
+
 	header('Location: ../app.php');
-	//if login succesfull
 } else {
 	// if error
 	header('Location: ../index.php?login=error');
 }
+
+
 
 

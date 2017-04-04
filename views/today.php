@@ -1,13 +1,22 @@
-﻿<div class="container-fluid">
-	<h4 class="grey text-center">Cześć! Masz dzisiaj parę rzeczy do zrobienia! :)</h4>
+﻿<?php 
+require '../modules/session.php';
+require '../modules/user.php';
+
+?>
+<div class="container-fluid">
+	<h4 class="grey text-center">Cześć!  Masz parę rzeczy do zrobienia! :)</h4>
 		<div class="tasks-wrapper">
 			<h4 class="tasks-title red">Zaległe <span class="glyphicon glyphicon-fire"></span></h4>
 				<ul class="tasks">
+
+					<?php 
+			$overdued_tasks = $user->get_overdued_tasks();
+					foreach ($overdued_tasks as $row):?>
 		      <li>
 		        <span class="tasks-icon-done"></span>
-		        <span class="glyphicon glyphicon-flag priority"></span>	
-		        <a href="#">Lorem ipsum</a>
-		        <span class="tasks-project">Codzienne</span>
+		        <span class="glyphicon glyphicon-flag priority-<?=$row['label_id']?>"></span>	
+		        <a href="#"><?=$row['title'];?></a>
+		        <span class="tasks-project"><?=$row['name'];?></span>
 
 		        <div class="tasks-config">
 		        	<a href=""><i class="glyphicon glyphicon-pencil" title="edytuj"></i></a>
@@ -18,12 +27,34 @@
 		        </div>
 		      </li>
 
-
-
-
+		      <?php ENDFOREACH;?>
 
 		    </ul>
+			<h4 class="tasks-title blue">Dzisiaj <span class="glyphicon glyphicon-calendar"></span></h4>
 
+			<ul class="tasks">
+
+					<?php 
+					$today_tasks = $user->get_tasks_by_date();
+					foreach ($today_tasks as $row):?>
+		      <li>
+		        <span class="tasks-icon-done"></span>
+		        <span class="glyphicon glyphicon-flag priority-<?=$row['label_id']?>"></span>	
+		        <a href="#"><?=$row['title'];?></a>
+		        <span class="tasks-project"><?=$row['name'];?></span>
+
+<!-- 		        <div class="tasks-config">
+		        	<a href=""><i class="glyphicon glyphicon-pencil" title="edytuj"></i></a>
+		        	<a href=""><i class="glyphicon glyphicon-calendar" title="zmień datę"></i></a>
+		        	<a href=""><i class="glyphicon glyphicon-flag" title="priorytet"></i></a>
+		        	<a href=""><i class="glyphicon glyphicon-trash" title="usuń"></i></a>
+
+		        </div> -->
+		      </li>
+
+		      <?php ENDFOREACH;?>
+
+		    </ul>
 		      <!-- ADD TASK MODULE -->
 		      	<div class="add-task-input-wrapper hidden">
 		      		<form>
@@ -31,10 +62,15 @@
 						<span class="btn-icon">
 						<span class="glyphicon glyphicon-th-list"></span>
 							<select placeholder="project">
-								<option value="html">-project-</option>
-							    <option value="html">HTML</option>
-							    <option value="css">CSS</option>
-							    <option value="javascript">JavaScript</option>
+								<option value="1">Szybkie</option>
+
+								<?php $projects = $user->get_projects();
+								 foreach ($projects as $row):
+								?>
+
+							    <option value="<?=$row['id'];?>"> <?=$row['name']?> </option>
+
+							    <?php ENDFOREACH; ?>
 							</select>
 						</span>
 
