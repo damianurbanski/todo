@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require 'config/config.php';
 require 'config/routing.php';
 session_start();
