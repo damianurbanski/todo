@@ -1,3 +1,3 @@
 # To do - aplikacja do zarządzania listą zadań
 
-Wersja: 0.0
+Wersja: 1.0.0 (Niestabilna)
