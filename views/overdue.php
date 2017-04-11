@@ -1,14 +1,13 @@
-﻿<?php 
+<?php 
 require '../modules/session.php';
 require '../modules/user.php';
-$today_tasks = $user->get_tasks_by_date();
+$overdue_tasks = $user->get_overdue_tasks();
 ?>
 <div class="container-fluid">
-<h4 class="grey text-center">Zadania na dziś</h4>
-	<?php if(!empty($today_tasks)){ ?>
-<h4 class="grey text-center">Masz parę rzeczy do zrobienia! :)</h4>
+	<h4 class="grey text-center">Zaległe zadania</h4>
+	<?php if(!empty($overdue_tasks)){ ?>
 <?php } else{ ?>
-<h4 class="grey text-center">Nie masz żadnych zadań do wykonania, dodaj kilka! :)</h4>
+<h5 class="grey text-center">Nie masz żandych zaległych zadań!</h5>
 		      	<button class="btn btn-green"  data-toggle="modal" data-target="#quick-add">Dodaj zadanie</button>
 		</div>
 <?php } ?>
@@ -16,7 +15,7 @@ $today_tasks = $user->get_tasks_by_date();
 
 			<ul class="tasks">
 					<?php 
-					foreach ($today_tasks as $row):?>
+					foreach ($overdue_tasks as $row):?>
 		    	<li>
 		        <span class="tasks-icon-done" data-id="<?=$row['id']?>"></span>
 		        <span class="glyphicon glyphicon-flag priority-<?=$row['label_id']?>"></span>	
@@ -27,5 +26,4 @@ $today_tasks = $user->get_tasks_by_date();
 		      <?php ENDFOREACH;?>
 
 		</div>
-
 </div>

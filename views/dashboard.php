@@ -1,31 +1,32 @@
-﻿<?php 
-require '../modules/session.php';
-require '../modules/user.php';
-$today_tasks = $user->get_tasks_by_date();
+<?php 
+require $_SERVER["DOCUMENT_ROOT"].'/modules/session.php';
+require $_SERVER["DOCUMENT_ROOT"].'/modules/user.php';
+
+
 ?>
 <div class="container-fluid">
-<h4 class="grey text-center">Zadania na dziś</h4>
-	<?php if(!empty($today_tasks)){ ?>
-<h4 class="grey text-center">Masz parę rzeczy do zrobienia! :)</h4>
+<?php if($user->get_tasks()){ ?>
+<h4 class="grey text-center">Cześć <?=$user->get('name');?> !  Masz parę rzeczy do zrobienia! :)</h4>
 <?php } else{ ?>
 <h4 class="grey text-center">Nie masz żadnych zadań do wykonania, dodaj kilka! :)</h4>
 		      	<button class="btn btn-green"  data-toggle="modal" data-target="#quick-add">Dodaj zadanie</button>
 		</div>
 <?php } ?>
-		<div class="tasks-wrapper">
 
+		<div class="tasks-wrapper">
+				<ul class="tasks">
 			<ul class="tasks">
 					<?php 
+					$today_tasks = $user->get_tasks();
 					foreach ($today_tasks as $row):?>
-		    	<li>
-		        <span class="tasks-icon-done" data-id="<?=$row['id']?>"></span>
+		      <li>
+		        <span class="tasks-icon-done"></span>
 		        <span class="glyphicon glyphicon-flag priority-<?=$row['label_id']?>"></span>	
 		        <a href="#"><?=$row['title'];?></a>
 		        <span class="tasks-project"></span>
-		      	</li>
+		      </li>
 
 		      <?php ENDFOREACH;?>
 
-		</div>
-
+		    </ul>
 </div>

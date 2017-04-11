@@ -1,4 +1,9 @@
-Options FollowSymLinks
 RewriteEngine On
-RewriteRule ^home$ index.php
-RewriteRule ^app$ app.php
+Options -MultiViews
+
+RewriteCond %{THE_REQUEST} ^\w+\ /(.*)\.php(\?.*)?\ HTTP/
+RewriteRule ^ http://%{HTTP_HOST}/%1 [R=301]
+
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule .* $0.php
+RewriteRule ^(app)-([\w-]+)/?$ $1.php?view=$2 [L,QSA,NC]

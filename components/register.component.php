@@ -33,6 +33,22 @@
 
 		}
 
+		// private function insert_default_projects(){
+		// 	$query = 'INSERT INTO `users` (`id`, `login`, `name`, `password`, `email`, `registered`, `last_seen`, `theme_id`, `points`, `lang_id`) 
+		// 			VALUES (NULL, :login, :name, :password, :email, :registered, :last_seen, 1, 0, 1)';
+
+		// 			$stmt = $pdo->prepare($query);
+
+		// 			$stmt->bindParam(":login",$this->login);
+		// 			$stmt->bindParam(":name",$this->name);
+		// 			$stmt->bindParam(":password",$this->password);
+		// 			$stmt->bindParam(":email",$this->email);
+		// 			$stmt->bindParam(":registered",$today);
+		// 			$stmt->bindParam(":last_seen",$today);
+		// 			return (bool) $stmt->execute();
+		// 			$stmt->close_cursor();
+		// }
+
 		// Chceck again email and login in database, and if user doesn't exist, insert new one
 		// Return true if action was succesfull and false if not
 		public function register(){
@@ -52,7 +68,13 @@
 					$stmt->bindParam(":registered",$today);
 					$stmt->bindParam(":last_seen",$today);
 					return (bool) $stmt->execute();
+					// $this->insert_default_projects($db->lastInsertId());
 					$stmt->close_cursor();
+
+
+
+
+
 
 			 }
 			 else return false;

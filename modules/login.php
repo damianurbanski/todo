@@ -1,9 +1,9 @@
 ﻿<?php 
 require '../config/config.php';
-require PATH . '/components/login.component.php';
-require PATH . '/components/user.component.php';
+require '../components/login.component.php';
+require '../components/user.component.php';
 
-
+var_dump($_POST);
 $login = new Login($_POST['login'],$_POST['password']);
 
 if($result = $login->init()){
@@ -11,12 +11,11 @@ if($result = $login->init()){
 	$_SESSION['uid'] = $result['id'];
 	$_SESSION['name'] = $result['name'];
 	$_SESSION['login'] = $result['login'];
-	User::init($result['id']);
 
-	header('Location: ../app.php');
+	header('Location: /app-dashboard');
 } else {
 	// if error
-	header('Location: ../index.php?login=error');
+	header('Location: ../index?login=error');
 }
 
 

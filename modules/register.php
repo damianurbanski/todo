@@ -18,23 +18,23 @@
 	);
 	switch (true) {
 		case emptyData():	
-	        header('location: ../index.html?register_state=empty');
+	        header('location: ../index?register_state=empty');
 	        break;
 	    case ($_POST["password"]!==$_POST["password-repeat"]):
-	        header('location: ../index.html?register_state=password_not_same');
+	        header('location: ../index?register_state=password_not_same');
 	        break;
-	    case (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)):
-	        header('location: ../index.html?register_state=bad_email');
-	        break;
+	    // case (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)):
+	    //     header('location: ../index?register_state=bad_email');
+	    //     break;
 	    case ($register->isExistLogin()):
-	        header('location: ../index.html?register_state=login_exist');
+	        header('location: ../index?register_state=login_exist');
 	        break;
 	    case ($register->isExistEmail()):
-	        header('location: ../index.html?register_state=email_exist');
+	        header('location: ../index?register_state=email_exist');
 	        break;
 	    case ($register->register()):
-	        header('location: ../index.html?register_state=successfull');
+	        header('location: ../index?register_state=successfull');
 	        break;
 	    default:
-			header('location: ../index.html?register_state=error');
+			header('location: ../index?register_state=error');
 	}

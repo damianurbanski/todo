@@ -1,11 +1,11 @@
-﻿<?php 
+<?php 
 require '../modules/session.php';
 require '../modules/user.php';
-$today_tasks = $user->get_tasks_by_date();
+$today_tasks = $user->get_tasks($_GET['pid']);
+
 ?>
 <div class="container-fluid">
-<h4 class="grey text-center">Zadania na dziś</h4>
-	<?php if(!empty($today_tasks)){ ?>
+<?php if(!empty($today_tasks)){ ?>
 <h4 class="grey text-center">Masz parę rzeczy do zrobienia! :)</h4>
 <?php } else{ ?>
 <h4 class="grey text-center">Nie masz żadnych zadań do wykonania, dodaj kilka! :)</h4>
@@ -15,6 +15,7 @@ $today_tasks = $user->get_tasks_by_date();
 		<div class="tasks-wrapper">
 
 			<ul class="tasks">
+
 					<?php 
 					foreach ($today_tasks as $row):?>
 		    	<li>

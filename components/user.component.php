@@ -11,7 +11,7 @@
 		private $lang_id;
 
 		public function __construct($id){
-			require(__DIR__."\..\config\dbconnect.php");
+			require($_SERVER["DOCUMENT_ROOT"]."\config\dbconnect.php");
 			$this->pdo = $pdo;
 
 			$query= 'SELECT * FROM users WHERE id = :id';
@@ -35,10 +35,19 @@
 		}
 
 		public function get_tasks($project = false){
-			if($project) $query= 'SELECT * FROM tasks WHERE user_id = :id AND project_id = :project_id';
-			else $query = $query= 'SELECT * FROM tasks WHERE user_id = :id';
-			$stmt = $this->pdo->prepare($query);
-			$stmt->bindParam(":id",$this->id);
+			if($project) {
+				$query= 'SELECT * FROM tasks WHERE user_id = :id AND project_id = :project_id';
+				$stmt = $this->pdo->prepare($query);
+				$stmt->bindParam(":id",$this->id);
+				$stmt->bindParam(":project_id",$project);
+			}
+			else {
+				$query = $query= 'SELECT * FROM tasks WHERE user_id = :id';
+				$stmt = $this->pdo->prepare($query);
+				$stmt->bindParam(":id",$this->id);
+				
+			}
+			
 			$stmt->execute();
 			return $stmt->fetchAll();
 			$stmt->close_cursor();
@@ -47,26 +56,24 @@
 		public function get_tasks_by_date($date = false){
 			if(!$date) $date = date("Y-m-d");
 			$query= 'SELECT * FROM tasks
-			JOIN projects
-			WHERE project_id = projects.id
-			AND tasks.user_id = :id
-			AND deadline = :date
+			WHERE tasks.user_id = :id
+			AND tasks.deadline = :deadline
 			';
 			$stmt = $this->pdo->prepare($query);
 			$stmt->bindParam(":id",$this->id);
-			$stmt->bindParam(":date",$date);
+			$stmt->bindParam(":deadline",$date,PDO::PARAM_STR);
 			$stmt->execute();
 			return $stmt->fetchAll();
 			$stmt->close_cursor();
-			
+			//NIE DZIAŁA
 		}
 			
-		public function get_overdued_tasks($project = false){
-			$query= 'SELECT * FROM tasks 
-			JOIN projects
-			WHERE project_id = projects.id
-			AND tasks.user_id = :id
-			AND tasks.deadline < CURDATE()';
+		public function get_overdue_tasks(){
+			$query = '
+					SELECT * FROM tasks WHERE
+					tasks.user_id = :id
+					AND tasks.deadline < CURDATE()
+			';
 
 			$stmt = $this->pdo->prepare($query);
 			$stmt->bindParam(":id",$this->id);
@@ -75,7 +82,20 @@
 			$stmt->close_cursor();
 			
 		}
+		public function get_fast_tasks(){
+			$query = '
+					SELECT * FROM tasks WHERE
+					tasks.user_id = :id
+					AND tasks.project_id =1
+			';
 
+			$stmt = $this->pdo->prepare($query);
+			$stmt->bindParam(":id",$this->id);
+			$stmt->execute();
+			return $stmt->fetchAll();
+			$stmt->close_cursor();
+			
+		}
 		public function get_projects(){
 			$query = $query= 'SELECT * FROM projects WHERE user_id = :id';
 			$stmt = $this->pdo->prepare($query);
@@ -84,6 +104,8 @@
 			return $stmt->fetchAll();
 			$stmt->close_cursor();
 		}
+
+		//COUNT TASKS
 		public function count_fast_tasks(){
 			$query = $query= 'SELECT COUNT(*) FROM tasks WHERE (user_id = :id AND project_id = 1)';
 			$stmt = $this->pdo->prepare($query);
@@ -98,8 +120,8 @@
 			$stmt->execute();
 			return $stmt->fetchColumn();
 		}
-		public function count_week_tasks(){
-			$query = $query= 'SELECT COUNT(*) FROM tasks WHERE (user_id = :id AND deadline > DATE_SUB(NOW(), INTERVAL 1 WEEK))';
+		public function count_overdue_tasks(){
+			$query = $query= 'SELECT COUNT(*) FROM tasks WHERE (user_id = :id AND deadline < CURDATE())';
 			$stmt = $this->pdo->prepare($query);
 			$stmt->bindParam(":id",$this->id);
 			$stmt->execute();
@@ -107,8 +129,35 @@
 		}
 
 
-}
 
-// $u = new User(1);
-// var_dump($u->get_overdued_tasks());
+		public function add_task($name,$project_id, $priority, $deadline){
+			$query = $query= 'INSERT INTO tasks (title, user_id, project_id, deadline, label_id, done) 
+			VALUES (:name, :uid, :pid, :deadline, :lid, 0)';
+			$stmt = $this->pdo->prepare($query);
+			$stmt->bindParam(":name",$name);
+			$stmt->bindParam(":uid",$this->id);
+			$stmt->bindParam(":pid",$project_id);
+			$stmt->bindParam(":deadline",$deadline);
+			$stmt->bindParam(":lid",$priority);
+			return $stmt->execute();
+		}
+		public function add_project($name){
+			$query = $query= 'INSERT INTO projects (name, user_id, color_id) 
+			VALUES ( :name, :uid, 1)';
+			$stmt = $this->pdo->prepare($query);
+			$stmt->bindParam(":name",$name);
+			$stmt->bindParam(":uid",$this->id);
+			return $stmt->execute();
+		}
+
+		public function remove_task($taskid){
+			$query = $query= 'DELETE FROM tasks WHERE id = :tid AND user_id = :uid';
+			$stmt = $this->pdo->prepare($query);
+			$stmt->bindParam(":tid",$taskid);
+			$stmt->bindParam(":uid",$this->id);
+			return $stmt->execute();
+			$stmt->close_cursor();
+		}
+
+}
 

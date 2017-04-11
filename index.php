@@ -1,8 +1,9 @@
 ﻿<?php
 require 'config/config.php';
+require 'config/routing.php';
 session_start();
 if(isset($_SESSION['uid'])){
-	header('Location: app.php');
+	header('Location: app-dashboard');
 }
 ?>
 
@@ -40,15 +41,15 @@ if(isset($_SESSION['uid'])){
       <span class="icon-bar"></span>
     </button>
  <a class="navbar-brand" rel="home" href="#" title="Buy Sell Rent Everyting">
-        <img style="max-width:100px; margin-top: -7px;"
-             src="/img/transparent-white-logo.png">
+        <img style="max-width:40px; margin-top: -7px;"
+             src="/img/logo.png">
     </a>
   </div>
   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right" style="color:white">
         <li>
         <a href="dashboard">
-        <li><a href="register">Informacje</a></li>
+        <li><a href="register" data-toggle="modal" data-target="#register">Informacje</a></li>
         <li><a href="login">Logowanie</a></li>
         <li><a href="#">Rejestracja</a></li>
         </a></li>
@@ -109,7 +110,7 @@ if(isset($_SESSION['uid'])){
       <!-- Modal content-->
 
       		<!-- REGISTER -->
-		<form class="container-fluid" action="modules\register.php" method="POST">
+		<form class="container-fluid" action="modules\register" method="POST">
 			<div class="form-group">
 		    <label for="text">Imię i nazwisko</label>
 		    <input type="text" class="form-control" name="name">
@@ -178,7 +179,7 @@ if(isset($_SESSION['uid'])){
       <button class="register-social google"><i class="icon-gplus-1"></i>&nbsp Zaloguj się przez google+</button>
       	</div>
       <!-- Modal content-->
-		<form class="container-fluid" action="modules\login.php" method="POST">
+		<form class="container-fluid" action="modules\login" method="POST">
 		  <div class="form-group">
 			<label for="login">Login lub email:</label>
 				    <input type="text" class="form-control" id="login" name="login">
