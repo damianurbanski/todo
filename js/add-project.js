@@ -16,7 +16,6 @@ $.ajax({
   }
 })
   .done(function( data ) {
-    console.log(data);
     if ( data=='true') {
 		state.addClass('succes');
     

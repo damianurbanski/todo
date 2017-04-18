@@ -22,12 +22,11 @@
 			$result = $stmt->fetch(PDO::FETCH_ASSOC);
 			$this->id = $result['id'];
 			$this->login = $result['login'];
+			$this->email = $result['email'];
 			$this->name = $result['name'];
 			$this->theme_id = $result['theme_id'];
 			$this->points = $result['points'];
 			$this->lang_id = $result['lang_id'];
-
-
 		}
 
 		public function get($data){
@@ -105,6 +104,16 @@
 			$stmt->close_cursor();
 		}
 
+		public function get_points(){
+			$query = $query= 'SELECT points FROM users WHERE id = :id';
+			$stmt = $this->pdo->prepare($query);
+			$stmt->bindParam(":id",$this->id);
+			$stmt->execute();
+			$result = $stmt->fetchAll();
+			return $result[0]['points'];
+			$stmt->close_cursor();
+		}
+
 		//COUNT TASKS
 		public function count_fast_tasks(){
 			$query = $query= 'SELECT COUNT(*) FROM tasks WHERE (user_id = :id AND project_id = 1)';
@@ -150,14 +159,55 @@
 			return $stmt->execute();
 		}
 
-		public function remove_task($taskid){
-			$query = $query= 'DELETE FROM tasks WHERE id = :tid AND user_id = :uid';
+		private function update_points($p){
+			$query = $query= 'UPDATE users SET points = points+:p WHERE id = :uid';
 			$stmt = $this->pdo->prepare($query);
-			$stmt->bindParam(":tid",$taskid);
+			$stmt->bindParam(":p",$p);
 			$stmt->bindParam(":uid",$this->id);
 			return $stmt->execute();
 			$stmt->close_cursor();
 		}
+
+
+
+
+		public function remove_task($taskid){
+			$query2 = $query= 'DELETE FROM tasks WHERE id = :tid AND user_id = :uid';
+			$stmt = $this->pdo->prepare($query);
+			$stmt->bindParam(":tid",$taskid);
+			$stmt->bindParam(":uid",$this->id);
+			$this->update_points(10);
+			return $stmt->execute();
+			$stmt->close_cursor();
+		}
+
+		public function delete_project($pid){
+			$query = $query= 'DELETE FROM projects WHERE id = :pid AND user_id = :uid';
+			$stmt = $this->pdo->prepare($query);
+			$stmt->bindParam(":pid",$pid);
+			$stmt->bindParam(":uid",$this->id);
+			return $stmt->execute();
+			$stmt->close_cursor();
+		}
+
+		public function update($l, $p, $n, $e){
+			$query = 'UPDATE users SET 
+			login = :login,
+			name = :name,
+			password = :password,
+			email = :email
+			WHERE id =:uid';
+			$stmt = $this->pdo->prepare($query);
+			$stmt->bindParam(":login",$l);
+			$stmt->bindParam(":name",$n);
+			$stmt->bindParam(":password",$p);
+			$stmt->bindParam(":email",$e);
+			$stmt->bindParam(":uid",$this->id);
+			return $stmt->execute();
+			$stmt->close_cursor();
+		}
+
+
 
 }
 

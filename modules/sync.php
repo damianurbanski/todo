@@ -6,6 +6,9 @@ if(!isset($_SESSION['uid'])){
 require $_SERVER["DOCUMENT_ROOT"] . '/modules/user.php';
 
 switch ($_GET['sync']){
+	case 'points':
+		echo $user->get_points();
+	break;
 	case 'fast':
 		echo $user->count_fast_tasks();
 	break;
@@ -17,7 +20,6 @@ switch ($_GET['sync']){
 	break;
 	case 'project-list':
 	$projects = $user->get_projects();
-
 						foreach ($projects as $row):
 							echo'<li><a href="project?pid='.$row['id'].'" class="ajax-load">
 							<span class="profile-color"></span>
@@ -26,9 +28,8 @@ switch ($_GET['sync']){
 							<button class="icon-dot-3 menu-dotted"></button>
 							<div class="submenu">
 								<button><i class="icon-pencil"></i></button>
-								<button><i class="icon-trash-empty"></i></button>
+								<button><i class="icon-trash-empty ajax-delete-project" data-id="'.$row['id'].'"></i></button>
 								<button><i class="icon-brush"></i></button>
-								<button><i class="glyphicon glyphicon-flag"></i></button>
 							</div>
 						</li>';
 						ENDFOREACH;

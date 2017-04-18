@@ -165,7 +165,7 @@ transform: translateY(3px);
   display: inline-block;
   width: 15px;
   height: 15px;
-  background: orangered;
+  background: #607D8B;
   border-radius: 50%;
   transform: translateY(2px);
 
@@ -191,12 +191,21 @@ opacity: 0;
 outline: none;
 border-radius: 4px;
 }
+
 .profile-usermenu ul li > .menu-dotted:focus{
   background: #e2e2e2;
 }
 .profile-usermenu ul li:hover > .menu-dotted{
   opacity: 1;
 }
+
+
+@media screen and(max-width: 700px){
+  .profile-usermenu ul li .menu-dotted{
+    opacity: 1!important;
+  }
+}
+
 .submenu{
   display: none;
   padding: 2px 15px;

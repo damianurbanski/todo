@@ -6,5 +6,6 @@ function sync(){
 	$('.ajax-sync-projects-list').load('modules/sync.php?sync=project-list');
 	$('.ajax-sync-project-options').load('modules/sync.php?sync=project-list-names-only');
 	$('.ajax-sync-view').load("views/"+url);
+	$('.ajax-sync-points').load('modules/sync.php?sync=points');
 }
 

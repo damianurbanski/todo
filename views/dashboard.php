@@ -1,7 +1,7 @@
 <?php 
 require $_SERVER["DOCUMENT_ROOT"].'/modules/session.php';
 require $_SERVER["DOCUMENT_ROOT"].'/modules/user.php';
-
+$today_tasks = $user->get_tasks();
 
 ?>
 <div class="container-fluid">
@@ -17,14 +17,13 @@ require $_SERVER["DOCUMENT_ROOT"].'/modules/user.php';
 				<ul class="tasks">
 			<ul class="tasks">
 					<?php 
-					$today_tasks = $user->get_tasks();
 					foreach ($today_tasks as $row):?>
-		      <li>
-		        <span class="tasks-icon-done"></span>
+		    	<li>
+		        <span class="tasks-icon-done" data-id="<?=$row['id']?>"></span>
 		        <span class="glyphicon glyphicon-flag priority-<?=$row['label_id']?>"></span>	
 		        <a href="#"><?=$row['title'];?></a>
 		        <span class="tasks-project"></span>
-		      </li>
+		      	</li>
 
 		      <?php ENDFOREACH;?>
 

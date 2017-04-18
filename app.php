@@ -2,6 +2,8 @@
 require '\config\config.php';
 require '\modules\session.php';
 require '\modules\user.php';
+$projects = $user->get_projects();
+
 
 ?>
 <!DOCTYPE html>
@@ -63,12 +65,12 @@ require '\modules\user.php';
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name">
 						<h4><?=$user->get('name');?>
-						<a href=""><i class="icon-cog"></i></a>
+						<a href="settings" class="ajax-load"><i class="icon-cog"></i></a>
 						</h4>
 						
 					</div>
 					<div class="profile-usertitle-points">
-					 PUNKTY:<?=$user->get('points');?>
+					 PUNKTY: <span class="ajax-sync-points"><?=$user->get('points');?></span>
 					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
@@ -100,7 +102,6 @@ require '\modules\user.php';
 					<ul class="nav ajax-sync-projects-list">
 
 					<?php 
-					$projects = $user->get_projects();
 
 						foreach ($projects as $row):
 
@@ -114,9 +115,8 @@ require '\modules\user.php';
 							<button class="icon-dot-3 menu-dotted"></button>
 							<div class="submenu">
 								<button><i class="icon-pencil"></i></button>
-								<button><i class="icon-trash-empty"></i></button>
+								<button><i class="icon-trash-empty ajax-delete-project" data-id="<?=$row['id']?>"></i></button>
 								<button><i class="icon-brush"></i></button>
-								<button><i class="glyphicon glyphicon-flag"></i></button>
 							</div>
 						</li>
 
@@ -255,6 +255,7 @@ require '\modules\user.php';
 <script src="js/add-task.js"></script>
 <script src="js/add-project.js"></script>
 <script src="js/done-task.js"></script>
+<script src="js/delete-project.js"></script>
 <script type="text/javascript">
 $("#content").load("views/dashboard");
 

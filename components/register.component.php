@@ -33,13 +33,18 @@
 
 		}
 
-		// private function insert_default_projects(){
-		// 	$query = 'INSERT INTO `users` (`id`, `login`, `name`, `password`, `email`, `registered`, `last_seen`, `theme_id`, `points`, `lang_id`) 
-		// 			VALUES (NULL, :login, :name, :password, :email, :registered, :last_seen, 1, 0, 1)';
+		// private function insert_default_projects($uid){
+		// 	$query = 'SELECT * FROM stardet_projects';
+		// 	$stmt = $pdo->prepare($query);
+		// 	$stmt->execute();
+		// 	$result = $stmt->fetchColumn();
+		// 	$stmt->close_cursor();
+
+		// 	$query = 'INSERT INTO `todo`.`projects` (`id`, `name`, `user_id`, `color_id`) VALUES (NULL, :name, :uid, :cid)';
 
 		// 			$stmt = $pdo->prepare($query);
 
-		// 			$stmt->bindParam(":login",$this->login);
+		// 			$stmt->bindParam(":name",$this->login);
 		// 			$stmt->bindParam(":name",$this->name);
 		// 			$stmt->bindParam(":password",$this->password);
 		// 			$stmt->bindParam(":email",$this->email);
